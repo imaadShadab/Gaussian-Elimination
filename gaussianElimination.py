@@ -3,6 +3,8 @@ matrix_A = [
     [0, 4,  2, 6],
     [1, 2,  5, 11]
 ]
+
+
 def gaussian_elimination(matrix):
     column_count = len(matrix[0])
     row_count = len(matrix)
