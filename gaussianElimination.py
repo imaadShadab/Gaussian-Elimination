@@ -1,7 +1,7 @@
 matrix_A = [
-    [0, 3, -1, 5],
-    [0, 4,  2, 6],
-    [1, 2,  5, 11]
+    [0, 2, 1, 4],
+    [1, 3, 2, 8],
+    [2, 1, 1, 7]
 ]
 
 
@@ -28,7 +28,35 @@ def gaussian_elimination(matrix):
                 matrix[row][col] = matrix[row][col] - (matrix[pivot][col]*factor)
     return matrix
 
-ref_matrix = gaussian_elimination(matrix_A)
 
-for row in ref_matrix:
+def back_substitution(U_matrix):
+    row_count = len(U_matrix)
+    column_count = len(U_matrix[0])
+    solution_list = [0] * row_count
+
+
+    for row in range(row_count-1,-1,-1):
+        rhs = U_matrix[row][-1]
+        pivot = U_matrix[row][row]
+        known_sum = 0
+        for col in range(row + 1, column_count - 1):
+            known_sum += U_matrix[row][col] * solution_list[col]
+
+        solution = (rhs - known_sum) / pivot
+        solution_list[row] = solution
+    
+    return solution_list
+
+
+
+echelon_matrix = gaussian_elimination(matrix_A)
+
+print("U-Matrix:")
+for row in echelon_matrix:
     print(row)
+    
+solutions = back_substitution(echelon_matrix)
+
+print("")
+print("Solutions:")
+print(solutions)
