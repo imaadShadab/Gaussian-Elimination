@@ -47,8 +47,6 @@ def back_substitution(U_matrix):
     
     return solution_list
 
-
-
 echelon_matrix = gaussian_elimination(matrix_A)
 
 print("U-Matrix:")
